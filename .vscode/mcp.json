@@ -1,0 +1,14 @@
+{
+  "servers": {
+    "xamppMcp": {
+      "type": "stdio",
+      "command": "node",
+      "args": [
+        "${workspaceFolder}/dist/server.js"
+      ],
+      "env": {
+        "XAMPP_DEFAULT_MODE": "console"
+      }
+    }
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "name": "xampp-mcp",
+  "version": "0.1.0",
+  "description": "MCP server for XAMPP and MySQL administration on Windows",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dony-aep/xampp-mcp.git"
+  },
+  "homepage": "https://github.com/dony-aep/xampp-mcp#readme",
+  "bugs": {
+    "url": "https://github.com/dony-aep/xampp-mcp/issues"
+  },
+  "type": "module",
+  "main": "dist/server.js",
+  "bin": {
+    "xampp-mcp": "dist/server.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "docs",
+    "package.json"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "clean": "rimraf dist",
+    "dev": "tsx src/server.ts",
+    "start": "node dist/server.js",
+    "lint": "tsc -p tsconfig.json --noEmit",
+    "prepack": "npm run build",
+    "prepublishOnly": "npm run lint && npm run build"
+  },
+  "keywords": [
+    "mcp",
+    "xampp",
+    "mysql",
+    "vscode"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.22.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.14.0",
+    "rimraf": "^6.0.1",
+    "tsx": "^4.20.5",
+    "typescript": "^5.8.3"
+  }
+}
