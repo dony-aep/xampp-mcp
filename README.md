@@ -62,8 +62,24 @@ Variables opcionales:
 - Para nombres de base/tabla usa `snake_case` (`_`) y evita `-`.
 - El MCP usa UTF-8 (`utf8mb4`) para preservar tildes y caracteres especiales.
 
+## Diagramas ER (flujo recomendado)
+
+Cuando pidas un diagrama de base de datos en VS Code chat:
+
+1. Ejecutar `mcp_xamppmcp_diagram_er` para obtener Mermaid desde el esquema real.
+2. Previsualizar en chat con `renderMermaidDiagram` usando `structuredContent.previewRequest.args.markup`.
+3. Si el usuario confirma SVG, ejecutar `mcp_xamppmcp_diagram_render` con `structuredContent.renderRequest.args`.
+
+### Salida SVG por defecto
+
+- Si no se envía `outputPath`, el SVG se guarda en `diagrams/<database>.svg` en la raíz del proyecto.
+- Para compatibilidad con clientes estrictos, `diagram_er` entrega un `renderRequest` mínimo (`code`) y `diagram_render` infiere la base desde el hint Mermaid `%% database: <db>`.
+
 Lista completa de tools:
 - [docs/tools.md](docs/tools.md)
+
+Historial de cambios:
+- [CHANGELOG.md](CHANGELOG.md)
 
 ## Licencia
 

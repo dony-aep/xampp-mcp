@@ -46,10 +46,6 @@ Campos de **base de datos** (no aceptan `-`):
 - `db_export.database`
 - `db_import.database`
 - `grant_manage.database`
-- `table_create.database`
-
-Campos de **tabla** (no aceptan `-`):
-- `table_create.table`
 
 ### Ejemplo válido para `db_create`
 
@@ -84,17 +80,6 @@ Sugerencia esperada: `database_example_2026`.
 Ejemplo recomendado de texto:
 - Español: `José Núñez - información pública`
 - Inglés: `John Smith - public information`
-
-### Ejemplo que falla en `table_create.table`
-
-```json
-{
-	"database": "mcp_test_2026",
-	"table": "items-test",
-	"createStatement": "CREATE TABLE `items-test` (id INT)",
-	"confirmed": true
-}
-```
 
 ## query_readonly
 Ejecuta solo consultas `SELECT`, `SHOW`, `DESCRIBE`, `EXPLAIN`.
@@ -135,23 +120,6 @@ Crea una base de datos.
 Input:
 - `database: string`
 - `ifNotExists?: boolean` (default `true`)
-- `confirmed: boolean`
-- `host?: string`
-- `port?: number`
-- `user?: string`
-- `password?: string`
-
-## table_create
-Crea una tabla con sentencia `CREATE TABLE`.
-
-Validaciones adicionales:
-- `createStatement` debe empezar con `CREATE TABLE`.
-- `createStatement` debe apuntar a la misma tabla indicada en `table`.
-
-Input:
-- `database: string`
-- `table: string`
-- `createStatement: string`
 - `confirmed: boolean`
 - `host?: string`
 - `port?: number`
@@ -219,3 +187,61 @@ Ejecuta script PHP con `php.exe` de XAMPP.
 Input:
 - `scriptPath: string`
 - `args?: string`
+
+## diagram_er
+Genera un diagrama ER en Mermaid a partir del esquema real de MySQL (`information_schema`).
+
+Input:
+- `database: string`
+- `tables?: string` (lista opcional separada por comas, p. ej. `users,orders`)
+- `show_columns?: boolean` (default `true`)
+- `show_types?: boolean` (default `true`)
+- `host?: string`
+- `port?: number`
+- `user?: string`
+- `password?: string`
+
+Salida:
+- Bloque de texto Mermaid (` ```mermaid ... ``` `)
+- `structuredContent.mermaid` con el código del diagrama
+- `structuredContent.previewRequest` para previsualizar primero con `renderMermaidDiagram`
+- `structuredContent.renderRequest` con payload sugerido para llamar `diagram_render`
+
+Notas:
+- `diagram_er` no genera SVG automáticamente; prioriza la previsualización rápida en chat.
+- Para SVG, usar `diagram_render` solo cuando el usuario lo solicite.
+
+Flujo recomendado en VS Code chat:
+1. Ejecutar `mcp_xamppmcp_diagram_er`.
+2. Llamar `renderMermaidDiagram` usando `structuredContent.previewRequest.args.markup` para previsualización rápida.
+3. Preguntar al usuario en el idioma actual de la conversación si también quiere el SVG.
+4. Si responde que sí, llamar `mcp_xamppmcp_diagram_render` con `structuredContent.renderRequest.args`.
+
+## diagram_render
+Valida Mermaid, renderiza SVG y opcionalmente guarda archivo en disco.
+
+Input:
+- `code: string` (código Mermaid)
+- `title?: string`
+- `database?: string` (para nombrar archivo por defecto)
+- `render_image?: boolean` (default `true`; si es `false`, solo valida y devuelve texto)
+- `save_file?: boolean` (default `true`)
+- `outputPath?: string` (ruta opcional de salida para el SVG)
+
+Tipos Mermaid soportados al inicio del código:
+- `erDiagram`, `flowchart`, `graph`, `sequenceDiagram`, `classDiagram`
+- `stateDiagram-v2`, `stateDiagram`, `journey`, `gantt`, `pie`
+- `gitGraph`, `gitgraph`, `mindmap`, `timeline`, `quadrantChart`
+- `sankey-beta`, `sankey`, `xychart-beta`, `xychart`, `block-beta`, `block`
+
+Salida:
+- Bloque de texto Mermaid validado
+- Bloque de imagen `image/svg+xml` cuando el render remoto está disponible
+- `structuredContent` con `diagramType`, `title`, `mermaid`, `rendered`, `saved`, `outputPath`
+
+Notas:
+- `diagram_render` usa render remoto (Kroki) para producir SVG, por eso tiene `openWorldHint: true`.
+- Si no hay conectividad o falla el render remoto, la tool devuelve fallback textual con el Mermaid.
+- Si `save_file=true` y no se envía `outputPath`, el archivo se guarda por defecto en `diagrams/<database>.svg` (o `diagrams/<title>.svg`) en la raíz del proyecto.
+- Si una llamada solo envía `code`, la tool también intenta inferir la base de datos desde un comentario Mermaid `%% database: <db>` para evitar guardar como `diagram.svg`.
+- `diagram_er` publica `renderRequest.args` con payload mínimo (`code`) para máxima compatibilidad con clientes que validan esquemas de tools de forma estricta (y evitan errores por propiedades adicionales).
