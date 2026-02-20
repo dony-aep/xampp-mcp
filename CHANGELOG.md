@@ -7,6 +7,13 @@ and this project adheres to Semantic Versioning.
 
 ## [Unreleased]
 
+## [1.1.2] - 2026-02-19
+
+### Fixed
+- Fixed MCP server metadata version in `src/server.ts` to match the published package version.
+- Fixed documentation to clarify that Mermaid preview via `renderMermaidDiagram` is specific to VS Code chat (introduced in VS Code 1.109).
+- Fixed diagram tooling docs with fallback guidance for MCP clients that do not expose `renderMermaidDiagram`.
+
 ## [1.1.1] - 2026-02-19
 
 ### Fixed
@@ -50,7 +57,8 @@ and this project adheres to Semantic Versioning.
 
 ---
 
-[Unreleased]: https://github.com/dony-aep/xampp-mcp/compare/v1.1.1...HEAD
+[Unreleased]: https://github.com/dony-aep/xampp-mcp/compare/v1.1.2...HEAD
+[1.1.2]: https://github.com/dony-aep/xampp-mcp/compare/v1.1.1...v1.1.2
 [1.1.1]: https://github.com/dony-aep/xampp-mcp/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/dony-aep/xampp-mcp/releases/tag/v1.1.0
 [1.0.0]: https://github.com/dony-aep/xampp-mcp/releases/tag/v1.0.0

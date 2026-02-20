@@ -210,6 +210,8 @@ Salida:
 Notas:
 - `diagram_er` no genera SVG automáticamente; prioriza la previsualización rápida en chat.
 - Para SVG, usar `diagram_render` solo cuando el usuario lo solicite.
+- La previsualización con `renderMermaidDiagram` es una capacidad del chat de VS Code (introducida en VS Code 1.109, January 2026).
+- En clientes MCP que no exponen `renderMermaidDiagram`, usar `diagram_render` y/o el bloque Mermaid textual como fallback.
 
 Flujo recomendado en VS Code chat:
 1. Ejecutar `mcp_xamppmcp_diagram_er`.

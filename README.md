@@ -88,6 +88,10 @@ Cuando pidas un diagrama de base de datos en VS Code chat:
 2. Previsualizar en chat con `renderMermaidDiagram` usando `structuredContent.previewRequest.args.markup`.
 3. Si el usuario confirma SVG, ejecutar `mcp_xamppmcp_diagram_render` con `structuredContent.renderRequest.args`.
 
+Nota de compatibilidad:
+- `renderMermaidDiagram` es una capacidad del chat de VS Code (introducida en VS Code 1.109, January 2026).
+- En otros clientes MCP, usar `diagram_render` para SVG o el bloque Mermaid textual como alternativa.
+
 ### Salida SVG por defecto
 
 - Si no se envía `outputPath`, el SVG se guarda en `diagrams/<database>.svg` en la raíz del proyecto.

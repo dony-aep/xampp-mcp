@@ -21,7 +21,7 @@ async function main(): Promise<void> {
   const server = new Server(
     {
       name: "xampp-mcp",
-      version: "1.0.0",
+      version: "1.1.2",
     },
     {
       capabilities: {
