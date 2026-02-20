@@ -7,6 +7,13 @@ and this project adheres to Semantic Versioning.
 
 ## [Unreleased]
 
+## [1.1.1] - 2026-02-19
+
+### Fixed
+- Fixed installation guidance by prioritizing global (`npm install -g xampp-mcp`) and local (`npm i xampp-mcp`) npm flows.
+- Fixed VS Code MCP setup examples to clearly separate global command usage from local project execution.
+- Fixed documentation ambiguity that could make `npx` behavior look like a runtime failure when the MCP server is waiting on stdio.
+
 ## [1.1.0] - 2026-02-19
 
 ### Added
@@ -43,6 +50,7 @@ and this project adheres to Semantic Versioning.
 
 ---
 
-[Unreleased]: https://github.com/dony-aep/xampp-mcp/compare/v1.1.0...HEAD
+[Unreleased]: https://github.com/dony-aep/xampp-mcp/compare/v1.1.1...HEAD
+[1.1.1]: https://github.com/dony-aep/xampp-mcp/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/dony-aep/xampp-mcp/releases/tag/v1.1.0
 [1.0.0]: https://github.com/dony-aep/xampp-mcp/releases/tag/v1.0.0

@@ -19,10 +19,10 @@ Instalación global:
 npm install -g xampp-mcp
 ```
 
-Sin instalación global:
+Instalación local en proyecto:
 
 ```powershell
-npx -y xampp-mcp
+npm i xampp-mcp
 ```
 
 ## Configuración en VS Code
@@ -34,8 +34,26 @@ Ejemplo recomendado en `.vscode/mcp.json`:
   "servers": {
     "xamppMcp": {
       "type": "stdio",
-      "command": "npx",
-      "args": ["-y", "xampp-mcp"],
+      "command": "xampp-mcp",
+      "args": [],
+      "env": {
+        "XAMPP_DIR": "C:\\xampp",
+        "XAMPP_DEFAULT_MODE": "console"
+      }
+    }
+  }
+}
+```
+
+Si instalaste el paquete localmente (`npm i xampp-mcp`), puedes usar:
+
+```jsonc
+{
+  "servers": {
+    "xamppMcp": {
+      "type": "stdio",
+      "command": "node",
+      "args": ["${workspaceFolder}/node_modules/xampp-mcp/dist/server.js"],
       "env": {
         "XAMPP_DIR": "C:\\xampp",
         "XAMPP_DEFAULT_MODE": "console"
